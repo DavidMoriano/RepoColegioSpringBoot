@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tablas.css}">
+    <meta charset="UTF-8">
+    <title>Listado Matriculaciones</title>
+</head>
+
+<body>
+
+    <h1>Listado matriculaciones</h1>
+    <div th:replace="~{menu :: menu}"></div>
+
+    <div class="container">
+        <div class="form">
+            <form th:action="@{/matriculaciones/listadoMatriculaciones}" method="post">
+                <label for="nombreAsignatura">Nombre Asignatura</label>
+                <input type="text" id="nombreAsignatura" name="nombreAsignatura"><br>
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="fecha">Fecha (desde)</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <h2 th:if="${lista == null or lista.isEmpty()}">No hay resultados que mostrar con esos filtros</h2>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>NOMBRE ASIGNATURA</th>
+            <th>NOMBRE ALUMNO</th>
+            <th>FECHA</th>
+            <th>ACTIVO</th>
+            <th>TASA</th>
+        </tr>
+        <tr th:each="matriculacion : ${lista}">
+            <td th:text="${matriculacion.nombreAsignatura}"></td>
+            <td th:text="${matriculacion.nombreAlumno}"></td>
+            <td th:text="${matriculacion.fecha}"></td>
+            <td th:text="${matriculacion.activo}"></td>
+            <td th:text="${matriculacion.tasa}"></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

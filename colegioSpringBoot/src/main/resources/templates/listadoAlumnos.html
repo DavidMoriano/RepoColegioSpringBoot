@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listado Alumnos</title>
+</head>
+
+<body>
+    <ul>
+        <li th:each="alumno : ${listaAlumnos}">
+            ID: <span th:text="${alumno.id}"></span>.
+            Nombre: <span th:text="${alumno.nombre}"></span> <span th:text="${alumno.apellido}"></span>
+        </li>
+    </ul>
+</body>
+
+</html>

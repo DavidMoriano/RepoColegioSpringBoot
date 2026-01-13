@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Actualizar Asignaturas</title>
+</head>
+
+<body>
+    <h1>Actualizar asignaturas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Actualizar Asignaturas</h2>
+        <div class="form">
+            <form th:action="@{/asignaturas/formularioActualizarAsignaturas}" method="post">
+                <label for="id">Id Asignatura</label>
+                <input type="text" id="id" name="id">
+                <label for="nombre">Nombre Asignatura</label>
+                <input type="text" id="nombre" name="nombre"><br>
+                <label for="curso">Curso</label>
+                <input type="text" id="curso" name="curso"><br>
+                <label for="tasa">Tasa (mayor a)</label>
+                <input type="text" id="tasa" name="tasa"><br>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <div th:each="asignatura : ${lista}" class="form">
+        <form th:action="@{/asignaturas/actualizarAsignaturas}" method="post">
+            <label for="id">Id Asignatura</label>
+            <input type="text" id="id" name="id" th:value="${asignatura.id}" hidden>
+            <label for="nombre">Nombre Asignatura</label>
+            <input type="text" id="nombre" name="nombre" th:value="${asignatura.nombre}"><br>
+            <label for="curso">Curso</label>
+            <input type="text" id="curso" name="curso" th:value="${asignatura.curso}"><br>
+            <label for="tasa">Tasa</label>
+            <input type="text" id="tasa" name="tasa" th:value="${asignatura.tasa}"><br>
+            Activo:
+            <input type="checkbox" id="activo" name="activo" value="1" th:checked="${asignatura.activo == 1}">
+            <br>
+            <input type="submit" value="Modificar">
+        </form>
+    </div>
+    
+     <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Asignatura modificada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al modifcar la asignatura</h2>
+    </div>
+</body>
+
+</html>

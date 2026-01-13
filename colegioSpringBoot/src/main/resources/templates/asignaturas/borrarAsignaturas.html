@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" th:href="@{/css/tablas.css}">
+    <title>Borrar Asignaturas</title>
+</head>
+
+<body>
+    <h1>Borrar asignaturas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Borrar Asignaturas</h2>
+        <div class="form">
+            <form th:action="@{/asignaturas/formularioBorrarAsignaturas}" method="post">
+                <label for="id">Id Asignatura</label>
+                <input type="text" id="id" name="id">
+                <label for="nombre">Nombre Asignatura</label>
+                <input type="text" id="nombre" name="nombre"><br>
+                <label for="curso">Curso</label>
+                <input type="text" id="curso" name="curso"><br>
+                <label for="tasa">Tasa (mayor a)</label>
+                <input type="text" id="tasa" name="tasa"><br>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CURSO</th>
+            <th>TASA</th>
+            <th>ACTIVO</th>
+            <th>ACCIÓN</th>
+        </tr>
+        <tr th:each="asignatura : ${lista}">
+            <td th:text="${asignatura.id}"></td>
+            <td th:text="${asignatura.nombre}"></td>
+            <td th:text="${asignatura.curso}"></td>
+            <td th:text="${asignatura.tasa}"></td>
+            <td th:text="${asignatura.activo}"></td>
+            <td>
+                <form th:action="@{/asignaturas/borrarAsignaturas}" method="post" style="display: inline;">
+                    <input type="hidden" name="id" th:value="${asignatura.id}">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
+        </tr>
+    </table>
+    
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Asignatura borrada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al borrar la asignatura</h2>
+    </div>
+
+</body>
+
+</html>

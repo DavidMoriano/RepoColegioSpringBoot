@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Actualizar Notas</title>
+</head>
+
+<body>
+    <h1>Actualizar notas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Actualizar Notas</h2>
+        <div class="form">
+            <form th:action="@{/notas/formularioActualizarNotas}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <div th:each="nota : ${lista}" class="form">
+        <form th:action="@{/notas/actualizarNota}" method="post">
+            <input type="hidden" name="id" th:value="${nota.id}">
+
+            <label for="alumno">Alumno</label>
+            <select name="alumno" id="alumno">
+                <option th:each="alumno : ${desplegableAlumnos}" th:value="${alumno.id}" th:text="${alumno.descripcion}"
+                    th:selected="${alumno.id == nota.idAlumno}"></option>
+            </select><br>
+
+            <label for="asignatura">Asignatura</label>
+            <select name="asignatura" id="asignatura">
+                <option th:each="asignatura : ${desplegableAsignaturas}" th:value="${asignatura.id}"
+                    th:text="${asignatura.descripcion}" th:selected="${asignatura.id == nota.idAsignatura}"></option>
+            </select><br>
+
+            <label for="nota">Nota</label>
+            <input type="text" id="nota" name="nota" th:value="${nota.nota}"><br>
+
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" th:value="${nota.fecha}"><br>
+
+            <input type="submit" value="Modificar">
+        </form>
+    </div>
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Nota modificada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al modifcar la nota</h2>
+    </div>
+</body>
+
+</html>

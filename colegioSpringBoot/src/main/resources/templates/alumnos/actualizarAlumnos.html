@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Actualizar Alumnos</title>
+</head>
+
+<body>
+    <h1>Actualizar alumnos</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Actualizar Alumnos</h2>
+        <div class="form">
+            <form th:action="@{/alumnos/formularioActualizarAlumnos}" method="post">
+                <label for="id">Id Alumno</label>
+                <input type="text" id="id" name="id">
+                <label for="nombre">Nombre Alumno</label>
+                <input type="text" id="nombre" name="nombre"><br>
+                <label for="apellido">Apellido Alumno</label>
+                <input type="text" id="apellido" name="apellido"><br>
+                Familia Numerosa:
+                <input type="checkbox" id="famNumerosa" name="famNumerosa" value="1" checked>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <div th:each="alumno : ${lista}" class="form">
+        <form th:action="@{/alumnos/actualizarAlumno}" method="post">
+            <label for="id">Id Alumno</label>
+            <input type="text" id="id" name="id" th:value="${alumno.id}" hidden>
+            <label for="nombre">Nombre Alumno</label>
+            <input type="text" id="nombre" name="nombre" th:value="${alumno.nombre}"><br>
+            <label for="apellido">Apellido Alumno</label>
+            <input type="text" id="apellido" name="apellido" th:value="${alumno.apellido}"><br>
+            Familia Numerosa:
+            <input type="checkbox" id="familiaNumerosa" name="familiaNumerosa" value="1"
+                th:checked="${alumno.familiaNumerosa == 1}">
+            Activo:
+            <input type="checkbox" id="activo" name="activo" value="1" th:checked="${alumno.activo == 1}"><br>
+            <label for="municipios">Municipio</label>
+            <select name="municipio" id="municipios">
+                <option th:each="municipio : ${desplegableMunicipios}" th:value="${municipio.id}"
+                    th:text="${municipio.descripcion}"></option>
+                <option th:value="${alumno.idMunicipio}" th:text="${alumno.municipio}" selected></option>
+            </select><br>
+            <input type="submit" value="Modificar">
+        </form>
+    </div>
+</body>
+
+      <b th:if="${resultado != null and resultado != 0}">Alumno actualizado correctamente</b>
+            <b th:if="${resultado != null and resultado == 0}">Error al actualizar</b>
+
+</html>

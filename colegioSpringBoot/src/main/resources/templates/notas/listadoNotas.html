@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tablas.css}">
+    <meta charset="UTF-8">
+    <title>Listado Notas</title>
+</head>
+
+<body>
+
+    <h1>Listado notas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+
+    <div class="container">
+        <div class="form">
+            <form th:action="@{/notas/listadoNotas}" method="post">
+                <label for="idAlumno">Id Alumno</label>
+                <input type="text" id="idAlumno" name="idAlumno">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="nota">Nota</label>
+                <input type="text" id="nota" name="nota"><br>
+                <label for="fecha">Fecha (desde)</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1"><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <h2 th:if="${lista == null or lista.isEmpty()}">No hay resultados que mostrar con esos filtros</h2>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID ALUMNO</th>
+            <th>NOMBRE ALUMNO</th>
+            <th>ASIGNATURA</th>
+            <th>NOTA</th>
+            <th>FECHA</th>
+        </tr>
+        <tr th:each="nota : ${lista}">
+            <td th:text="${nota.idAlumno}"></td>
+            <td th:text="${nota.nombreAlumno}"></td>
+            <td th:text="${nota.nombreAsignatura}"></td>
+            <td th:text="${nota.nota}"></td>
+            <td th:text="${nota.fecha}"></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

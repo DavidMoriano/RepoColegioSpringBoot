@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <meta charset="UTF-8">
+    <title>Insertar Alumno</title>
+</head>
+
+<body>
+    <header>
+        <h2>Inserción de nuevo alumno</h2>
+    </header>
+    <div th:replace="~{menu :: menu}"></div>
+
+    <div class="container">
+        <div class="form">
+            <form th:action="@{/alumnos/insertarAlumno}" method="post">
+                <div id="formulario">
+                    <label for="id">DNI Alumno</label>
+                    <input type="text" id="id" name="id">
+                    <label for="nombre">Nombre Alumno</label>
+                    <input type="text" id="nombre" name="nombre"><br>
+                    <label for="apellido">Apellido Alumno</label>
+                    <input type="text" id="apellido" name="apellido"><br>
+
+                    <label for="famNumerosa">Familia Numerosa:</label>
+                    <input type="checkbox" id="famNumerosa" name="famNumerosa" value="1" checked>
+
+                    <label for="activo">Activo:</label>
+                    <input type="checkbox" id="activo" name="activo" value="1" checked>
+
+                    <select name="municipios" id="municipios">
+                        <option th:each="municipio : ${desplegableMunicipios}" th:value="${municipio.id}"
+                            th:text="${municipio.descripcion}"></option>
+                    </select>
+                    <input type="submit" value="Enviar">
+                </div>
+            </form>
+
+            <b th:if="${resultado != null and resultado != 0}">Alumno insertado correctamente</b>
+            <b th:if="${resultado != null and resultado == 0}">Error al insertar</b>
+        </div>
+    </div>
+</body>
+
+</html>

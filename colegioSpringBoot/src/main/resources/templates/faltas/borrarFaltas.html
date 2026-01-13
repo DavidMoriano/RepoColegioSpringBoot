@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" th:href="@{/css/tablas.css}">
+    <title>Borrar Faltas</title>
+</head>
+
+<body>
+    <h1>Borrar faltas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Borrar Faltas</h2>
+        <div class="form">
+            <form th:action="@{/faltas/formularioBorrarFaltas}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                Justificada:
+                <input type="checkbox" id="justificada" name="justificada" value="1"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID ALUMNO</th>
+            <th>NOMBRE ALUMNO</th>
+            <th>ASIGNATURA</th>
+            <th>FECHA</th>
+            <th>JUSTIFICADA</th>
+            <th>ACCIÓN</th>
+        </tr>
+        <tr th:each="falta : ${lista}">
+            <td th:text="${falta.idAlumno}"></td>
+            <td th:text="${falta.nombreAlumno}"></td>
+            <td th:text="${falta.nombreAsignatura}"></td>
+            <td th:text="${falta.fecha}"></td>
+            <td th:text="${falta.justificada == 1 ? 'Sí' : 'No'}"></td>
+            <td>
+                <form th:action="@{/faltas/borrarFalta}" method="post" style="display: inline;">
+                    <input type="hidden" name="idFalta" th:value="${falta.idFalta}">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
+        </tr>
+    </table>
+ <div th:if="${resultado != null}">
+        	<h2 th:if="${resultado > 0}" style="color: green;">Falta borrada correctamente</h2>
+     	   	<h2 th:if="${resultado == 0}" style="color: red;">Error al borrar la falta</h2>
+    	</div>
+    </div>
+</body>
+
+</html>

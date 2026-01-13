@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Poner Falta</title>
+</head>
+
+<body>
+    <h1>Poner falta a alumno</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Insertar Falta</h2>
+        <div class="form">
+            <form th:action="@{/faltas/insertarFalta}" method="post">
+                <label for="alumno">Alumno</label>
+                <select name="alumno" id="alumno" required>
+                    <option value="">Seleccione un alumno</option>
+                    <option th:each="alumno : ${desplegableAlumnos}" th:value="${alumno.id}"
+                        th:text="${alumno.descripcion}"></option>
+                </select><br>
+
+                <label for="asignatura">Asignatura</label>
+                <select name="asignatura" id="asignatura" required>
+                    <option value="">Seleccione una asignatura</option>
+                    <option th:each="asignatura : ${desplegableAsignaturas}" th:value="${asignatura.id}"
+                        th:text="${asignatura.descripcion}"></option>
+                </select><br>
+
+                <label for="fecha">Fecha (dejar vacío para fecha actual)</label>
+                <input type="date" id="fecha" name="fecha"><br>
+
+                Justificada:
+                <input type="checkbox" id="justificada" name="justificada" value="1"><br>
+
+                <input type="submit" value="Poner Falta">
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Falta insertada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al insertar la falta</h2>
+    </div>
+
+</body>
+
+</html>

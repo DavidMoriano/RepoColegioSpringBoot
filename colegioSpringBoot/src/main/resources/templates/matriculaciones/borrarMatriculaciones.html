@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Borrar Matriculaciones</title>
+</head>
+
+<body>
+    <h1>Borrar matriculaciones</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Buscar Matriculaciones</h2>
+        <div class="form">
+            <form th:action="@{/matriculaciones/formularioBorrarMatriculaciones}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <div th:each="matriculacion : ${lista}" class="form">
+        <form th:action="@{/matriculaciones/borrarMatriculacion}" method="post">
+            <input type="hidden" name="id" th:value="${matriculacion.id}">
+
+            <p><strong>Alumno:</strong> <span th:text="${matriculacion.nombreAlumno}"></span></p>
+            <p><strong>Asignatura:</strong> <span th:text="${matriculacion.nombreAsignatura}"></span></p>
+            <p><strong>Fecha:</strong> <span th:text="${matriculacion.fecha}"></span></p>
+            <p><strong>Tasa:</strong> <span th:text="${matriculacion.tasa}"></span></p>
+
+            <input type="submit" value="Borrar">
+        </form>
+    </div>
+    
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Matriculación borrada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al borrar la matriculación</h2>
+    </div>
+</body>
+
+</html>

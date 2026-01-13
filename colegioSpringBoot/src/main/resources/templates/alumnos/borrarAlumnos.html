@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" th:href="@{/css/tablas.css}">
+    <meta charset="UTF-8">
+    <title>Borrar Alumnos</title>
+</head>
+
+<body>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Borrar Alumnos</h2>
+        <div class="form">
+            <form th:action="@{/alumnos/formularioBorrarAlumnos}" method="post">
+                <label for="id">Id Alumno</label>
+                <input type="text" id="id" name="id">
+                <label for="nombre">Nombre Alumno</label>
+                <input type="text" id="nombre" name="nombre"><br>
+                <label for="apellido">Apellido Alumno</label>
+                <input type="text" id="apellido" name="apellido"><br>
+                Familia Numerosa:
+                <input type="checkbox" id="famNumerosa" name="famNumerosa" value="1" checked>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+    <h2 th:if="${lista == null or lista.isEmpty()}">No hay resultados que mostrar con esos filtros</h2>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>MUNICIPIO</th>
+            <th>BORRAR</th>
+        </tr>
+        <tr th:each="alumno : ${lista}">
+            <td th:text="${alumno.id}"></td>
+            <td th:text="${alumno.nombre}"></td>
+            <td th:text="${alumno.apellido}"></td>
+            <td th:text="${alumno.municipio}"></td>
+            <td>
+                <form th:action="@{/alumnos/borrarAlumno}" method="POST">
+                    <input type="hidden" name="id" th:value="${alumno.id}">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
+        </tr>
+    </table>
+   <b th:if="${resultado != null and resultado != 0}">Alumno borrado correctamente</b>
+            <b th:if="${resultado != null and resultado == 0}">Error al borrar</b>
+</body>
+
+</html>

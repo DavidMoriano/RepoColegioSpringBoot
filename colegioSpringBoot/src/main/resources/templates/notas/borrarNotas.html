@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" th:href="@{/css/tablas.css}">
+    <title>Borrar Notas</title>
+</head>
+
+<body>
+    <h1>Borrar notas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Borrar Notas</h2>
+        <div class="form">
+            <form th:action="@{/notas/formularioBorrarNotas}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID ALUMNO</th>
+            <th>NOMBRE ALUMNO</th>
+            <th>ASIGNATURA</th>
+            <th>NOTA</th>
+            <th>FECHA</th>
+            <th>ACCIÓN</th>
+        </tr>
+        <tr th:each="nota : ${lista}">
+            <td th:text="${nota.idAlumno}"></td>
+            <td th:text="${nota.nombreAlumno}"></td>
+            <td th:text="${nota.nombreAsignatura}"></td>
+            <td th:text="${nota.nota}"></td>
+            <td th:text="${nota.fecha}"></td>
+            <td>
+                <form th:action="@{/notas/borrarNota}" method="post" style="display: inline;">
+                    <input type="hidden" name="id" th:value="${nota.id}">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
+        </tr>
+    </table>
+<div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Nota borrada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al borrar la nota</h2>
+    </div>
+</body>
+
+</html>

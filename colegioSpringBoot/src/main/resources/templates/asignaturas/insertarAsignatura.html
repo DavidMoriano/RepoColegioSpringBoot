@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Insertar Asignatura</title>
+</head>
+
+<body>
+    <h1>Insertar asignatura</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Insertar Asignatura</h2>
+        <div class="form">
+            <form th:action="@{/asignaturas/insertarAsignatura}" method="post">
+                <label for="id">Id Asignatura</label>
+                <input type="text" id="id" name="id" required>
+                <label for="nombre">Nombre Asignatura</label>
+                <input type="text" id="nombre" name="nombre" required><br>
+                <label for="curso">Curso</label>
+                <input type="text" id="curso" name="curso" required><br>
+                <label for="tasa">Tasa</label>
+                <input type="text" id="tasa" name="tasa" required><br>
+                Activo:
+                <input type="checkbox" id="activo" name="activo" value="1" checked><br>
+                <input type="submit" value="Insertar">
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Asignatura insertada correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al insertar la asignatura</h2>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formularios.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tablas.css}">
+    <meta charset="UTF-8">
+    <title>Listado Faltas</title>
+</head>
+
+<body>
+
+    <h1>Listado faltas</h1>
+    <div th:replace="~{menu :: menu}"></div>
+
+    <div class="container">
+        <div class="form">
+            <form th:action="@{/faltas/listadoFaltas}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha (desde - dejar vacío para hoy)</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                Justificada:
+                <input type="checkbox" id="justificada" name="justificada" value="1"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <h2 th:if="${lista == null or lista.isEmpty()}">No hay resultados que mostrar con esos filtros</h2>
+
+    <table th:if="${lista != null and !lista.isEmpty()}">
+        <tr>
+            <th>ID ALUMNO</th>
+            <th>NOMBRE ALUMNO</th>
+            <th>ASIGNATURA</th>
+            <th>FECHA</th>
+            <th>JUSTIFICADA</th>
+        </tr>
+        <tr th:each="falta : ${lista}">
+            <td th:text="${falta.idAlumno}"></td>
+            <td th:text="${falta.nombreAlumno}"></td>
+            <td th:text="${falta.nombreAsignatura}"></td>
+            <td th:text="${falta.fecha}"></td>
+            <td th:text="${falta.justificada == 1 ? 'Sí' : 'No'}"></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/formularios.css}">
+    <title>Actualizar Matriculaciones</title>
+</head>
+
+<body>
+    <h1>Actualizar matriculaciones</h1>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+        <h2>Buscar Matriculaciones</h2>
+        <div class="form">
+            <form th:action="@{/matriculaciones/formularioActualizarMatriculaciones}" method="post">
+                <label for="nombreAlumno">Nombre Alumno</label>
+                <input type="text" id="nombreAlumno" name="nombreAlumno"><br>
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura"><br>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha"><br>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+    </div>
+
+    <div th:each="matriculacion : ${lista}" class="form">
+        <form th:action="@{/matriculaciones/actualizarMatriculacion}" method="post">
+            <input type="hidden" name="id" th:value="${matriculacion.id}">
+
+            <label for="alumno">Alumno</label>
+            <select name="alumno" id="alumno">
+                <option th:each="alumno : ${desplegableAlumnos}" th:value="${alumno.id}" th:text="${alumno.descripcion}"
+                    th:selected="${alumno.id == matriculacion.idAlumno}"></option>
+            </select><br>
+
+            <label for="asignatura">Asignatura</label>
+            <select name="asignatura" id="asignatura">
+                <option th:each="asignatura : ${desplegableAsignaturas}" th:value="${asignatura.id}"
+                    th:text="${asignatura.descripcion}" th:selected="${asignatura.id == matriculacion.idAsignatura}">
+                </option>
+            </select><br>
+
+            <label for="tasa">Tasa</label>
+            <input type="text" id="tasa" name="tasa" th:value="${matriculacion.tasa}"><br>
+
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" th:value="${matriculacion.fecha}"><br>
+
+            <input type="submit" value="Modificar">
+        </form>
+    </div>
+    
+    <div th:if="${resultado != null}">
+        <h2 th:if="${resultado > 0}" style="color: green;">Matriculación actualiza correctamente</h2>
+        <h2 th:if="${resultado == 0}" style="color: red;">Error al actualizar la matriculación</h2>
+    </div>
+</body>
+
+</html>
