@@ -1,6 +1,4 @@
 package com.adrian.colegio.servicio.impl;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,6 @@ import com.adrian.colegio.servicio.interfaces.IAsignaturaService;
 public class AsignaturasServiceImpl implements IAsignaturaService {
 	@Autowired
 	IAsignaturasDAO asignaturasDAO;
-
-	@Override
-	public ArrayList<AsignaturaDTO> obtenerAsignaturas() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ArrayList<AsignaturaDTO> obtenerAsignaturasPorIdNombreCursoTasaActivo(Integer id, String nombre,

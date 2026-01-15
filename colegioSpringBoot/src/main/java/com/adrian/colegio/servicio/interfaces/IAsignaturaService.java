@@ -1,12 +1,10 @@
 package com.adrian.colegio.servicio.interfaces;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.adrian.colegio.dtos.AsignaturaDTO;
 
 public interface IAsignaturaService {
-	public ArrayList<AsignaturaDTO> obtenerAsignaturas() throws SQLException;
 	
 	public ArrayList<AsignaturaDTO> obtenerAsignaturasPorIdNombreCursoTasaActivo(Integer id, String nombre,
 			Integer curso, Float tasa, int activo);
