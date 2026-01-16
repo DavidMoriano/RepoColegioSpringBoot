@@ -22,12 +22,12 @@ public class NotasServiceImpl implements INotasService {
 	}
 
 	@Override
-	public int insertarNota(String idAlumno, String idAsignatura, String nota, String fecha) {
+	public int insertarNota(int idAlumno, int idAsignatura, String nota, String fecha) {
 		return notasDAO.insertarNota(idAlumno, idAsignatura, nota, fecha);
 	}
 
 	@Override
-	public int actualizarNota(String id, String idAlumno, String idAsignatura, String nota, String fecha) {
+	public int actualizarNota(String id, int idAlumno, int idAsignatura, String nota, String fecha) {
 		return notasDAO.actualizarNota(id, idAlumno, idAsignatura, nota, fecha);
 	}
 

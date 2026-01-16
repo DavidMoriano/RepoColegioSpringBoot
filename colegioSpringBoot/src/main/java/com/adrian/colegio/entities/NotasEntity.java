@@ -71,9 +71,8 @@ public class NotasEntity {
 		this.fecha = fecha;
 	}
 
-	public NotasEntity(Integer id, AlumnoEntity alumno, AsignaturaEntity asignatura, String nota, String fecha) {
+	public NotasEntity(AlumnoEntity alumno, AsignaturaEntity asignatura, String nota, String fecha) {
 		super();
-		this.id = id;
 		this.alumno = alumno;
 		this.asignatura = asignatura;
 		this.nota = nota;
@@ -83,9 +82,13 @@ public class NotasEntity {
 	public NotasEntity() {
 		super();
 	}
-
-	public NotasEntity(Integer idAlumno, String idAsignatura, String nota2, String fecha2) {
-		// TODO Auto-generated constructor stub
+	public NotasEntity(int id, AlumnoEntity alumno, AsignaturaEntity asignatura, String nota, String fecha) {
+		super();
+		this.id = id;
+		this.alumno = alumno;
+		this.asignatura = asignatura;
+		this.nota = nota;
+		this.fecha = fecha;
 	}
 
 }

@@ -8,10 +8,10 @@ public interface INotasService {
 	public ArrayList<NotasDTO> obtenerNotasPorFiltros(Integer idAlumno, String nombreAlumno, String asignatura,
 			Float nota, String fecha, int activo);
 
-	public int insertarNota(String idAlumno, String idAsignatura, String nota, String fecha);
-
-	public int actualizarNota(String id, String idAlumno, String idAsignatura, String nota, String fecha);
-
 	public int borrarNota(String id);
+
+	public int actualizarNota(String id, int idAlumno, int idAsignatura, String nota, String fecha);
+
+	int insertarNota(int idAlumno, int idAsignatura, String nota, String fecha);
 
 }
