@@ -46,19 +46,26 @@ public class MatriculacionesEntity {
 		this.caja = caja;
 	}
 
-	public MatriculacionesEntity(Integer id, AsignaturaEntity asignatura, AlumnoEntity alumno, String fecha,
-			Integer activo) {
+	public MatriculacionesEntity(AsignaturaEntity asignatura, AlumnoEntity alumno, String fecha, Integer activo) {
 		super();
-		this.id = id;
 		this.asignatura = asignatura;
 		this.alumno = alumno;
 		this.fecha = fecha;
 		this.activo = activo;
 	}
+	
+	public MatriculacionesEntity(AsignaturaEntity asignatura, AlumnoEntity alumno, String fecha, CajaEntity caja) {
+		super();
+		this.asignatura = asignatura;
+		this.alumno = alumno;
+		this.fecha = fecha;
+		this.caja = caja;
+	}
 
 	public MatriculacionesEntity() {
 		super();
 	}
+
 
 	public Integer getId() {
 		return id;

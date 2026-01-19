@@ -1,113 +1,124 @@
 package com.adrian.colegio.dtos;
 
 public class MatriculacionesDTO {
-    private int id;
-    private int idAsignatura;
-    private String nombreAsignatura;
-    private int idAlumno;
-    private String nombreAlumno;
-    private String fecha;
-    private int activo;
-    private double tasa;
+	private int id;
+	private int idAsignatura;
+	private String nombreAsignatura;
+	private int idAlumno;
+	private String nombreAlumno;
+	private String fecha;
+	private int activo;
+	private double tasa;
 
-    // Constructor completo con tasa
-    public MatriculacionesDTO(int id, int idAsignatura, String nombreAsignatura, int idAlumno, String nombreAlumno,
-            String fecha, int activo, double tasa) {
-        super();
-        this.id = id;
-        this.idAsignatura = idAsignatura;
-        this.nombreAsignatura = nombreAsignatura;
-        this.idAlumno = idAlumno;
-        this.nombreAlumno = nombreAlumno;
-        this.fecha = fecha;
-        this.activo = activo;
-        this.tasa = tasa;
-    }
-    
-    public MatriculacionesDTO(int id, int idAsignatura, String nombreAsignatura, int idAlumno, String nombreAlumno,
-            String fecha, int activo) {
-        super();
-        this.id = id;
-        this.idAsignatura = idAsignatura;
-        this.nombreAsignatura = nombreAsignatura;
-        this.idAlumno = idAlumno;
-        this.nombreAlumno = nombreAlumno;
-        this.fecha = fecha;
-        this.activo = activo;
-    }
+	public MatriculacionesDTO(int id, int idAsignatura, String nombreAsignatura, int idAlumno, String nombreAlumno,
+			String fecha, int activo, double tasa) {
+		super();
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.nombreAsignatura = nombreAsignatura;
+		this.idAlumno = idAlumno;
+		this.nombreAlumno = nombreAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+		this.tasa = tasa;
+	}
 
-    public MatriculacionesDTO(int id, int idAsignatura, int idAlumno, String fecha, int activo) {
-        super();
-        this.id = id;
-        this.idAsignatura = idAsignatura;
-        this.idAlumno = idAlumno;
-        this.fecha = fecha;
-        this.activo = activo;
-    }
+	public MatriculacionesDTO(Integer id, Integer idAsignatura, String nombreAsignatura, Integer idAlumno,
+			String nombreAlumno, String fecha, int activo, double tasa) {
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.nombreAsignatura = nombreAsignatura;
+		this.idAlumno = idAlumno;
+		this.nombreAlumno = nombreAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+		this.tasa = tasa;
+	}
 
-    // Getters y setters
+	public MatriculacionesDTO(int id, int idAsignatura, String nombreAsignatura, int idAlumno, String nombreAlumno,
+			String fecha, int activo) {
+		super();
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.nombreAsignatura = nombreAsignatura;
+		this.idAlumno = idAlumno;
+		this.nombreAlumno = nombreAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public MatriculacionesDTO(int id, int idAsignatura, int idAlumno, String fecha, int activo) {
+		super();
+		this.id = id;
+		this.idAsignatura = idAsignatura;
+		this.idAlumno = idAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Getters y setters
 
-    public int getIdAsignatura() {
-        return idAsignatura;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setIdAsignatura(int idAsignatura) {
-        this.idAsignatura = idAsignatura;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNombreAsignatura() {
-        return nombreAsignatura;
-    }
+	public int getIdAsignatura() {
+		return idAsignatura;
+	}
 
-    public void setNombreAsignatura(String nombreAsignatura) {
-        this.nombreAsignatura = nombreAsignatura;
-    }
+	public void setIdAsignatura(int idAsignatura) {
+		this.idAsignatura = idAsignatura;
+	}
 
-    public int getIdAlumno() {
-        return idAlumno;
-    }
+	public String getNombreAsignatura() {
+		return nombreAsignatura;
+	}
 
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
-    }
+	public void setNombreAsignatura(String nombreAsignatura) {
+		this.nombreAsignatura = nombreAsignatura;
+	}
 
-    public String getNombreAlumno() {
-        return nombreAlumno;
-    }
+	public int getIdAlumno() {
+		return idAlumno;
+	}
 
-    public void setNombreAlumno(String nombreAlumno) {
-        this.nombreAlumno = nombreAlumno;
-    }
+	public void setIdAlumno(int idAlumno) {
+		this.idAlumno = idAlumno;
+	}
 
-    public String getFecha() {
-        return fecha;
-    }
+	public String getNombreAlumno() {
+		return nombreAlumno;
+	}
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
+	public void setNombreAlumno(String nombreAlumno) {
+		this.nombreAlumno = nombreAlumno;
+	}
 
-    public int getActivo() {
-        return activo;
-    }
+	public String getFecha() {
+		return fecha;
+	}
 
-    public void setActivo(int activo) {
-        this.activo = activo;
-    }
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 
-    public double getTasa() {
-        return tasa;
-    }
+	public int getActivo() {
+		return activo;
+	}
 
-    public void setTasa(double tasa) {
-        this.tasa = tasa;
-    }
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
+
+	public double getTasa() {
+		return tasa;
+	}
+
+	public void setTasa(double tasa) {
+		this.tasa = tasa;
+	}
 }

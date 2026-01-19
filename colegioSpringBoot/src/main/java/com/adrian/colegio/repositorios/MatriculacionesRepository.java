@@ -1,6 +1,6 @@
 package com.adrian.colegio.repositorios;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -22,7 +22,7 @@ public interface MatriculacionesRepository extends CrudRepository<Matriculacione
 			    m.activo,
 			    a.tasa
 			)
-			FROM MatriculacionEntity m
+			FROM MatriculacionesEntity m
 			JOIN m.asignatura a
 			JOIN m.alumno al
 			WHERE (:id IS NULL OR m.id = :id)
@@ -34,9 +34,14 @@ public interface MatriculacionesRepository extends CrudRepository<Matriculacione
 			  AND (:activo IS NULL OR m.activo = :activo)
 			  AND (:tasa IS NULL OR a.tasa = :tasa)
 			""")
-	List<MatriculacionesDTO> buscarMatriculacionesAvanzado(@Param("id") Integer id, @Param("idAlumno") Integer idAlumno,
-			@Param("idAsignatura") Integer idAsignatura, @Param("nombreAlumno") String nombreAlumno,
-			@Param("nombreAsignatura") String nombreAsignatura, @Param("fecha") String fecha,
-			@Param("activo") Integer activo, @Param("tasa") Double tasa);
+	ArrayList<MatriculacionesDTO> buscarMatriculacionesAvanzado(
+			@Param("id") Integer id, 
+			@Param("idAlumno") Integer idAlumno,
+			@Param("idAsignatura") Integer idAsignatura, 
+			@Param("nombreAlumno") String nombreAlumno,
+			@Param("nombreAsignatura") String nombreAsignatura,
+			@Param("fecha") String fecha,
+			@Param("activo") Integer activo, 
+			@Param("tasa") Double tasa);
 
 }

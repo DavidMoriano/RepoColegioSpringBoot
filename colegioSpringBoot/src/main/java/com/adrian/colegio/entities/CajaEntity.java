@@ -29,6 +29,12 @@ public class CajaEntity {
 		super();
 	}
 
+	public CajaEntity(MatriculacionesEntity matricula, Double importe) {
+		super();
+		this.matricula = matricula;
+		this.importe = importe;
+	}
+
 	public Integer getId() {
 		return id;
 	}

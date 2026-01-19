@@ -8,11 +8,11 @@ public interface INotasDAO {
 
 	int borrarNota(String id);
 
-	ArrayList<NotasDTO> obtenerNotasPorFiltros(Integer idAlumno, String nombreAlumno, String asignatura, Float nota,
-			String fecha, int activo);
-
 	int insertarNota(int idAlumno, int idAsignatura, String nota, String fecha);
 
 	int actualizarNota(String id, int idAlumno, int idAsignatura, String nota, String fecha);
+
+	ArrayList<NotasDTO> obtenerNotasPorFiltros(Integer idAlumno, String nombreAlumno, String nombreAsignatura,
+			Float nota, String fecha, int activo);
 
 }

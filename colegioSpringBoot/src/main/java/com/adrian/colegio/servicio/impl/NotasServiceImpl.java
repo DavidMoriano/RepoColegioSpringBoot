@@ -14,13 +14,7 @@ import com.adrian.colegio.servicio.interfaces.INotasService;
 public class NotasServiceImpl implements INotasService {
 	@Autowired
 	INotasDAO notasDAO;
-
-	@Override
-	public ArrayList<NotasDTO> obtenerNotasPorFiltros(Integer idAlumno, String nombreAlumno, String asignatura,
-			Float nota, String fecha, int activo) {
-		return notasDAO.obtenerNotasPorFiltros(idAlumno, nombreAlumno, asignatura, nota, fecha, activo);
-	}
-
+	
 	@Override
 	public int insertarNota(int idAlumno, int idAsignatura, String nota, String fecha) {
 		return notasDAO.insertarNota(idAlumno, idAsignatura, nota, fecha);
@@ -34,6 +28,12 @@ public class NotasServiceImpl implements INotasService {
 	@Override
 	public int borrarNota(String id) {
 		return notasDAO.borrarNota(id);
+	}
+
+	@Override
+	public ArrayList<NotasDTO> obtenerNotasPorFiltros(Integer idAlumno, String nombreAlumno, String nombreAsignatura,
+			Float nota, String fecha, int activo) {
+		return notasDAO.obtenerNotasPorFiltros(idAlumno, nombreAlumno, nombreAsignatura, nota, fecha, activo);
 	}
 
 }

@@ -8,7 +8,7 @@ import com.adrian.colegio.dtos.MatriculacionesDTO;
 public interface IMatriculacionesDAO {
 	double obtenerTasaAsignatura(String idAsignatura);
 
-	int insertarMatriculacion(String idAsignatura, String idAlumno, String fecha, String tasa) throws SQLException;
+	int insertarMatriculacion(String idAsignatura, String idAlumno, String fecha, int activo) throws SQLException;
 
 	ArrayList<MatriculacionesDTO> obtenerMatriculacionesPorFiltros(String nombreAsignatura, String nombreAlumno,
 			String fecha, int activo);
