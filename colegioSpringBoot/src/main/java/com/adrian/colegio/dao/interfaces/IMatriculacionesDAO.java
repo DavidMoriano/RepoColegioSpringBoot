@@ -17,7 +17,7 @@ public interface IMatriculacionesDAO {
 			int activo);
 
 	int actualizarMatriculacion(String id, String idAsignatura, String idAlumno, String fecha, String tasa)
-			throws SQLException;
+			throws SQLException, Exception;
 
 	int borrarMatriculacion(String id) throws SQLException;
 }

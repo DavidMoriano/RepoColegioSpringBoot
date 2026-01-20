@@ -55,6 +55,28 @@ public class MatriculacionesDTO {
 		this.fecha = fecha;
 		this.activo = activo;
 	}
+	
+	public MatriculacionesDTO(String nombreAsignatura, String nombreAlumno, String fecha, int activo) {
+		super();
+		this.nombreAsignatura = nombreAsignatura;
+		this.nombreAlumno = nombreAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+	}
+	
+	
+	
+
+	public MatriculacionesDTO(int id, String nombreAsignatura, String nombreAlumno, String fecha, int activo,
+			double tasa) {
+		super();
+		this.id = id;
+		this.nombreAsignatura = nombreAsignatura;
+		this.nombreAlumno = nombreAlumno;
+		this.fecha = fecha;
+		this.activo = activo;
+		this.tasa = tasa;
+	}
 
 	// Getters y setters
 

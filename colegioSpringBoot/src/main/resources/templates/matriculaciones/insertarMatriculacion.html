@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div th:if="${resultado != null}">
+    <div th:if="${resultado != null and resultado > 0}">
         <h2 th:if="${resultado > 0}" style="color: green;">Matriculación insertada correctamente</h2>
         <h2 th:if="${resultado == 0}" style="color: red;">Error al insertar la matriculación</h2>
     </div>
