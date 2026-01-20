@@ -27,7 +27,7 @@
     </div>
 
     <div th:each="nota : ${lista}" class="form">
-        <form th:action="@{/notas/actualizarNota}" method="post">
+        <form th:action="@{/notas/actualizarNotas}" method="post">
             <input type="hidden" name="id" th:value="${nota.id}">
 
             <label for="alumno">Alumno</label>

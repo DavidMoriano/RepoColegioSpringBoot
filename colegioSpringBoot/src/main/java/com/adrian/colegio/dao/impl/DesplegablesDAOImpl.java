@@ -7,22 +7,24 @@ import org.springframework.stereotype.Repository;
 
 import com.adrian.colegio.dao.interfaces.IDesplegablesDAO;
 import com.adrian.colegio.dtos.DesplegableDTO;
+import com.adrian.colegio.entities.AlumnoEntity;
+import com.adrian.colegio.entities.AsignaturaEntity;
 import com.adrian.colegio.entities.MunicipioEntity;
+import com.adrian.colegio.repositorios.AlumnoRepository;
+import com.adrian.colegio.repositorios.AsignaturaRepository;
 import com.adrian.colegio.repositorios.MunicipioRepository;
 
 @Repository
 public class DesplegablesDAOImpl implements IDesplegablesDAO {
 
-	@Autowired // Inyectamos el repository
+	@Autowired
 	private MunicipioRepository municipioRepository;
 
-	@Override
-	public ArrayList<DesplegableDTO> desplegableMunicipios() {
-		// Utilizamos el método que nos "regala" Spring data JPA
-		Iterable<MunicipioEntity> listaEntidadesMunicipios = municipioRepository.findAll();
-		ArrayList<DesplegableDTO> listaMunicipios = mapeoEntidadMunicioComboDTO(listaEntidadesMunicipios);
-		return listaMunicipios;
-	}
+	@Autowired
+	private AlumnoRepository alumnosRepo;
+
+	@Autowired
+	private AsignaturaRepository asigRepo;
 
 	private ArrayList<DesplegableDTO> mapeoEntidadMunicioComboDTO(Iterable<MunicipioEntity> listaEntidadesMunicipios) {
 		ArrayList<DesplegableDTO> listaCombos = new ArrayList<>();
@@ -33,16 +35,45 @@ public class DesplegablesDAOImpl implements IDesplegablesDAO {
 
 	}
 
+	private ArrayList<DesplegableDTO> mapeoEntidadAlumnoComboDTO(Iterable<AlumnoEntity> listaEntidadesAlumno) {
+		ArrayList<DesplegableDTO> listaCombos = new ArrayList<>();
+
+		for (AlumnoEntity alumnosEntity : listaEntidadesAlumno) {
+			listaCombos.add(new DesplegableDTO(alumnosEntity.getId(), alumnosEntity.getNombre()));
+		}
+		return listaCombos;
+
+	}
+
+	private ArrayList<DesplegableDTO> mapeoEntidadAsignaturaComboDTO(
+			Iterable<AsignaturaEntity> listaEntidadesAsignatura) {
+		ArrayList<DesplegableDTO> listaCombos = new ArrayList<>();
+
+		for (AsignaturaEntity asignaturaEntity : listaEntidadesAsignatura) {
+			listaCombos.add(new DesplegableDTO(asignaturaEntity.getId(), asignaturaEntity.getNombre()));
+		}
+		return listaCombos;
+	}
+
+	@Override
+	public ArrayList<DesplegableDTO> desplegableMunicipios() {
+		Iterable<MunicipioEntity> listaEntidadesMunicipios = municipioRepository.findAll();
+		ArrayList<DesplegableDTO> listaMunicipios = mapeoEntidadMunicioComboDTO(listaEntidadesMunicipios);
+		return listaMunicipios;
+	}
+
 	@Override
 	public ArrayList<DesplegableDTO> desplegableAlumnos() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<AlumnoEntity> listaEntidadesAlumnos = alumnosRepo.findAll();
+		ArrayList<DesplegableDTO> listaAlumnos = mapeoEntidadAlumnoComboDTO(listaEntidadesAlumnos);
+		return listaAlumnos;
 	}
 
 	@Override
 	public ArrayList<DesplegableDTO> desplegableAsignaturas() {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<AsignaturaEntity> listaEntidadesAsignaturas = asigRepo.findAll();
+		ArrayList<DesplegableDTO> listaAsignaturas = mapeoEntidadAsignaturaComboDTO(listaEntidadesAsignaturas);
+		return listaAsignaturas;
 	}
 
 }

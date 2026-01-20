@@ -43,7 +43,7 @@
             <td th:text="${nota.nota}"></td>
             <td th:text="${nota.fecha}"></td>
             <td>
-                <form th:action="@{/notas/borrarNota}" method="post" style="display: inline;">
+                <form th:action="@{/notas/borrarNotas}" method="post" style="display: inline;">
                     <input type="hidden" name="id" th:value="${nota.id}">
                     <input type="submit" value="Borrar">
                 </form>
