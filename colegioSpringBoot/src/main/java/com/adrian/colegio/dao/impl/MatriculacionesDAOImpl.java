@@ -69,8 +69,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 	public ArrayList<MatriculacionesDTO> obtenerMatriculacionesPorFiltros(String nombreAsignatura, String nombreAlumno,
 			String fecha, int activo) {
 
-		// Puedes normalizar los strings aquí si quieres (trim, toLowerCase parcial,
-		// etc.)
 		return repoMatri.buscarMatriculacionesPorFiltros(
 				nombreAsignatura != null && !nombreAsignatura.trim().isEmpty() ? nombreAsignatura.trim() : null,
 				nombreAlumno != null && !nombreAlumno.trim().isEmpty() ? nombreAlumno.trim() : null,
@@ -100,7 +98,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 
 		boolean modificado = false;
 
-		// Actualizar asignatura si se proporciona
 		if (idAsignatura != null && !idAsignatura.trim().isEmpty()) {
 			int idAsig = Integer.parseInt(idAsignatura);
 			AsignaturaEntity asignatura = repoAsig.findById(idAsig)
@@ -109,7 +106,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 			modificado = true;
 		}
 
-		// Actualizar alumno si se proporciona
 		if (idAlumno != null && !idAlumno.trim().isEmpty()) {
 			int idAlum = Integer.parseInt(idAlumno);
 			AlumnoEntity alumno = repoAlum.findById(idAlum)
@@ -118,7 +114,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 			modificado = true;
 		}
 
-		// Actualizar fecha si se proporciona
 		if (fecha != null && !fecha.trim().isEmpty()) {
 			matriculacion.setFecha(fecha);
 			modificado = true;
@@ -128,7 +123,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 			repoMatri.save(matriculacion);
 		}
 
-		// Actualizar caja si existe y la asignatura cambió (o siempre recalcular)
 		CajaEntity caja = repoCaja.findByMatricula(matriculacion);
 		if (caja != null) {
 			double nuevaTasa = matriculacion.getAsignatura().getTasa();
@@ -152,7 +146,6 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 		MatriculacionesEntity matriculacion = repoMatri.findById(idInt)
 				.orElseThrow(() -> new IllegalArgumentException("Matrícula no encontrada: " + id));
 
-		// Eliminar entrada en caja asociada
 		CajaEntity caja = repoCaja.findByMatricula(matriculacion);
 		if (caja != null) {
 			repoCaja.delete(caja);

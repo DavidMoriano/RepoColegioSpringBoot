@@ -81,15 +81,14 @@ public class MatriculacionesController {
 
 	@PostMapping("/insertarMatriculacion")
 	public String insertarMatriculacion(@RequestParam("alumno") int idAlumno,
-			@RequestParam("asignatura") int idAsignatura,
-			@RequestParam("fecha") String fecha,
+			@RequestParam("asignatura") int idAsignatura, @RequestParam("fecha") String fecha,
 			@RequestParam(value = "activo", defaultValue = "1") String activo, ModelMap model) {
- 
+
 		System.out.print("Alumno: " + idAlumno + "\n");
 		System.out.print("Asignatura: " + idAsignatura + "\n");
 		System.out.print("Fecha: " + fecha + "\n");
 		System.out.print("Activo: " + activo + "\n");
-		
+
 		LocalDate fechaFiltro;
 		if (fecha != null || fecha.isEmpty()) {
 			try {
@@ -104,8 +103,7 @@ public class MatriculacionesController {
 		Integer idGenerado = matriculacionesService.insertarMatriculacion(String.valueOf(idAsignatura),
 				String.valueOf(idAlumno), fechaFiltro.toString(), activo);
 
-		model.addAttribute("resultado",
-				idGenerado > 0 ? "Matrícula creada con éxito (ID: " + idGenerado + ")" : "Error al crear matrícula");
+		model.addAttribute("resultado", idGenerado);
 
 		model.addAttribute("desplegableAlumnos", desplegables.desplegableAlumnos());
 		model.addAttribute("desplegableAsignaturas", desplegables.desplegableAsignaturas());
@@ -135,9 +133,7 @@ public class MatriculacionesController {
 		}
 
 		List<MatriculacionesDTO> lista = matriculacionesService.obtenerMatriculacionesPorFiltros(nombreAsignatura,
-				nombreAlumno, fechaFiltro != null ? fechaFiltro.toString() : null, 1 // solo activas por defecto en
-																						// actualización
-		);
+				nombreAlumno, fechaFiltro != null ? fechaFiltro.toString() : null, 1);
 
 		model.addAttribute("lista", lista);
 		model.addAttribute("nombreAlumno", nombreAlumno);
@@ -152,8 +148,7 @@ public class MatriculacionesController {
 			@RequestParam(value = "alumno", required = false) Integer idAlumno,
 			@RequestParam(value = "asignatura", required = false) Integer idAsignatura,
 			@RequestParam(value = "fecha", required = false) String fecha,
-			@RequestParam(value = "tasa", required = false) String tasa, // opcional, se recalcula normalmente
-			ModelMap model) {
+			@RequestParam(value = "tasa", required = false) String tasa, ModelMap model) {
 
 		model.addAttribute("desplegableAlumnos", desplegables.desplegableAlumnos());
 		model.addAttribute("desplegableAsignaturas", desplegables.desplegableAsignaturas());
@@ -162,7 +157,7 @@ public class MatriculacionesController {
 				idAsignatura != null ? idAsignatura.toString() : null, idAlumno != null ? idAlumno.toString() : null,
 				fecha, tasa);
 
-		model.addAttribute("resultado", resultado > 0 ? "Matrícula actualizada" : "Error al actualizar");
+		model.addAttribute("resultado", resultado);
 
 		return "matriculaciones/actualizarMatriculaciones";
 	}
@@ -203,11 +198,7 @@ public class MatriculacionesController {
 	public String borrarMatriculacion(@RequestParam("id") String idMatricula, ModelMap model) {
 
 		Integer resultado = matriculacionesService.borrarMatriculacion(idMatricula);
-		model.addAttribute("resultado", resultado > 0 ? "Matrícula eliminada" : "Error al eliminar");
-
-		model.addAttribute("desplegableAlumnos", desplegables.desplegableAlumnos());
-		model.addAttribute("desplegableAsignaturas", desplegables.desplegableAsignaturas());
-
+		model.addAttribute("resultado", resultado);
 		return "matriculaciones/borrarMatriculaciones";
 	}
 }
